@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,6 +11,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './Screens/HomeScreen';
 import ProductScreen from './Screens/ProductScreen';
+import store from './store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,9 +24,9 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
-   <RouterProvider router={router}/>
-  </>
+  <Provider store={store}>
+    <RouterProvider router={router}/>
+  </Provider>
 );
 
 reportWebVitals()
