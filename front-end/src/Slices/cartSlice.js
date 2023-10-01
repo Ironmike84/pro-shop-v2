@@ -28,14 +28,21 @@ const cartSlice = createSlice({
             state.itemsPrice = addDecimals(state.cartItems.reduce((acc, item)=>
             acc + item.price * item.qty, 0))
 
-            //Calculate Shipping price
-
+            //Calculate Shipping price (If order is over $100 then free, else $10.00 shipping)
+            state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10);
 
             //Calculate Tax price
+            state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice).toFixed(2))
             //Calculate Total price
-
-        }
-    }
+            state.totalPrice = (
+                Number(state.itemsPrice) +
+                Number(state.shippingPrice) +
+                Number(state.taxPrice)).toFixed(2);
+                localStorage.setItem('cart', JSON.stringify(state))
+        },
+    },
 });
+
+export const { addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
