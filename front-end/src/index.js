@@ -9,6 +9,7 @@ import {
 import '../src/assets/Styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CartScreen from './Screens/CartScreen';
 import HomeScreen from './Screens/HomeScreen';
 import ProductScreen from './Screens/ProductScreen';
 import store from './store';
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/' element={<HomeScreen/>}/>
       <Route path='/api/products/:id' element={<ProductScreen/>}/>
+      <Route path='/cart' element={<CartScreen/>}/>
     </Route>
   )
 )
