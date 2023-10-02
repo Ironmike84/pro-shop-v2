@@ -4,17 +4,27 @@ import { FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Message from '../Components/Message';
-import { addToCart } from '../Slices/cartSlice.js';
+import { addToCart, removeFromCart } from '../Slices/cartSlice.js';
 const CartScreen = () => {
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
-
+// Bring in the state of the Cart
 const cart = useSelector((state)=> state.cart);
 const { cartItems } = cart;
 
+// Handler Functions for Cart
+
 const addToCartHandler =  (product, qty) => {
     dispatch(addToCart({...product, qty}))
+}
+
+const removeFromCartHandler =  (id) => {
+    dispatch(removeFromCart(id))
+}
+
+const checkOutHandler = () => {
+    navigate('/login?redirect=/shipping')
 }
 
 return (
@@ -52,7 +62,10 @@ return (
                                         </Form.Control>
                         </Col>
                         <Col md={2}>
-                            <Button type="button" variant='light'>
+                            <Button 
+                                type="button"
+                                variant='light'
+                                onClick={() => removeFromCartHandler(item._id)}>
                                 <FaTrash/>
                             </Button>
                         </Col>
@@ -70,7 +83,12 @@ return (
                         ${ cartItems.reduce((acc, item)=> acc + item.qty * item.price, 0).toFixed(2)}
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <Button type='button' className='btn-block' disabled={cartItems.length === 0}>Proceed to Checkout</Button>
+                        <Button 
+                        type='button' 
+                        className='btn-block' 
+                        disabled={cartItems.length === 0}
+                        onClick={()=> checkOutHandler()}
+                        >Proceed to Checkout</Button>
                     </ListGroup.Item>
                 </ListGroup>
             </Card>
