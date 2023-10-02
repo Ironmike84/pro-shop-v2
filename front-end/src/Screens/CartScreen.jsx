@@ -32,13 +32,13 @@ return (
     <Row>
         <Col md={8}>
         <h1 style={{ marginBottom: '20px'}}>Shopping Cart</h1>
-        {cartItems.length === 0 ? 
+        {cartItems.length === 0 ?
         (<Message>Your Cart is Empty
             <Link to='/'>Go Back</Link>
         </Message>) : (
             <ListGroup variant='flush'>
                 { cartItems.map((item)=>(
-                <ListGroup.Item key={item._id} rounded>
+                <ListGroup.Item key={item._id}>
                     <Row>
                         <Col md={2}>
                             <Image src={item.image} alt={item.name} fluid rounded/>
@@ -62,7 +62,7 @@ return (
                                         </Form.Control>
                         </Col>
                         <Col md={2}>
-                            <Button 
+                            <Button
                                 type="button"
                                 variant='light'
                                 onClick={() => removeFromCartHandler(item._id)}>
@@ -78,14 +78,14 @@ return (
         <Col md={4}>
             <Card>
                 <ListGroup variant='flush'>
-                    <ListGroup.Item rounded>
+                    <ListGroup.Item>
                         <h2>SubTotal: ({cartItems.reduce((acc, item)=> acc + item.qty, 0)}) Items</h2>
                         ${ cartItems.reduce((acc, item)=> acc + item.qty * item.price, 0).toFixed(2)}
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <Button 
-                        type='button' 
-                        className='btn-block' 
+                        <Button
+                        type='button'
+                        className='btn-block'
                         disabled={cartItems.length === 0}
                         onClick={()=> checkOutHandler()}
                         >Proceed to Checkout</Button>
