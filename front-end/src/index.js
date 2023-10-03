@@ -8,12 +8,15 @@ import {
 } from 'react-router-dom';
 import '../src/assets/Styles/index.css';
 import App from './App';
+import PrivateRoute from './Components/PrivateRoutes';
 import reportWebVitals from './reportWebVitals';
 import CartScreen from './Screens/CartScreen';
 import HomeScreen from './Screens/HomeScreen';
 import LoginScreen from './Screens/LoginScreen';
 import ProductScreen from './Screens/ProductScreen';
 import RegisterScreen from './Screens/RegisterScreen';
+import ShippingScreen from './Screens/ShippingScreen';
+
 import store from './store';
 
 const router = createBrowserRouter(
@@ -24,6 +27,8 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartScreen/>}/>
       <Route path='/login' element={<LoginScreen/>}/>
       <Route path='/register' element={<RegisterScreen/>}/>
+      <Route path='' element={<PrivateRoute/>}/>
+        <Route path='/shipping' element={<ShippingScreen/>}/>
     </Route>
   )
 )
